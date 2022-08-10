@@ -1,8 +1,8 @@
-sudo: required language: node_js
+sudo:
+  required language: node_js
 node_js:
-  - "stable"
-
+  - stable
 services:
-  - dockerbefore_install:
+  - dockerbefore_install: null
   - docker build -t kacperking/frontend-app -f Dockerfile.prod .script:
   - docker run -e CI=true kacperking/frontend-app npm run test -- --coverage
