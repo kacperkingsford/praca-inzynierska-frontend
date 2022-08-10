@@ -6,4 +6,4 @@ services:
   - docker
 before_install:
   - docker build -t kacperking/frontend-app -f Dockerfile .
-script: docker run -e CI=true kacperking/frontend-app npm run test -- --coverage
+script: docker run -e CI=true kacperking/frontend-app npm run test --coverage
