@@ -1,10 +1,18 @@
 # DEVELOPMENT ONLY
-FROM node:14-alpine
-#RUN apk add chromium
-WORKDIR /app
-#ENV CHROME_BIN=/usr/bin/chromium-browser
+FROM node:14-alpine as builder
+
+WORKDIR '/app'
+
 COPY package.json .
-RUN npm install
+
+RUN npm i
+
 COPY . .
 
-CMD ["npm", "start"]
+RUN npm run build
+
+FROM nginx 
+
+EXPOSE 80 
+
+COPY --from=builder /app/build /usr/share/nginx/html
